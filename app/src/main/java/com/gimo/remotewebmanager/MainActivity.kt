@@ -17,15 +17,23 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b=ActivityMainBinding.inflate(layoutInflater); setContentView(b.root)
+        SystemBars.apply(b.root)
         adapter=DeviceAdapter(::openDevice, ::deviceMenu)
         b.list.layoutManager=LinearLayoutManager(this); b.list.adapter=adapter
         b.addButton.setOnClickListener { startActivity(Intent(this, EditDeviceActivity::class.java)) }
+        b.updateButton.setOnClickListener { Updater.checkNow(this) }
         lifecycleScope.launch { dao.observeAll().collect { list ->
             adapter.submit(list)
             b.emptyText.visibility=if(list.isEmpty()) android.view.View.VISIBLE else android.view.View.GONE
             b.list.visibility=if(list.isEmpty()) android.view.View.GONE else android.view.View.VISIBLE
         } }
     }
+
+    override fun onResume() {
+        super.onResume()
+        Updater.maybeAutoCheck(this)
+    }
+
     private fun openDevice(d: Device) {
         lifecycleScope.launch { dao.touch(d.id, System.currentTimeMillis()) }
         getSharedPreferences("prefs", MODE_PRIVATE).edit().putLong("last_device", d.id).apply()

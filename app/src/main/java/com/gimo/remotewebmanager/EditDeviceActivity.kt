@@ -20,6 +20,7 @@ class EditDeviceActivity: AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState); b=ActivityEditDeviceBinding.inflate(layoutInflater); setContentView(b.root)
+        SystemBars.apply(b.root)
         val id=intent.getLongExtra("device_id",0)
         if(id>0) lifecycleScope.launch { editing=dao.get(id); editing?.let { b.nameInput.setText(it.name); b.urlInput.setText(it.url) } }
         b.scanButton.setOnClickListener { scanner.launch(ScanOptions().setPrompt("扫描远程链接二维码").setBeepEnabled(false).setOrientationLocked(false)) }

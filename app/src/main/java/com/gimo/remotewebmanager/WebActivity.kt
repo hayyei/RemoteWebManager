@@ -21,6 +21,7 @@ class WebActivity: AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState); b=ActivityWebBinding.inflate(layoutInflater); setContentView(b.root)
+        SystemBars.apply(b.root)
         val id=intent.getLongExtra("device_id",0)
         val w=b.webView
         CookieManager.getInstance().setAcceptCookie(true); CookieManager.getInstance().setAcceptThirdPartyCookies(w,true)
