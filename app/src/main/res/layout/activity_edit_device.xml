@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="20dp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="添加设备" android:textSize="26sp" android:textStyle="bold" android:paddingBottom="18dp" />
+    <EditText android:id="@+id/nameInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="设备名称（可选）" />
+    <EditText android:id="@+id/urlInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="远程链接 https://..." android:inputType="textUri" android:minLines="2" />
+    <Button android:id="@+id/scanButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="扫描二维码" android:layout_marginTop="16dp" />
+    <Button android:id="@+id/saveButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="保存设备" android:layout_marginTop="8dp" />
+</LinearLayout>
