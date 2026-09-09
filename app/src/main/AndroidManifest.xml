@@ -19,6 +19,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <activity android:name=".ScanActivity" android:screenOrientation="portrait" />
         <activity android:name=".WebActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".EditDeviceActivity" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".MainActivity" android:exported="true">

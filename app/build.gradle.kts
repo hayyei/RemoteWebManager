@@ -12,12 +12,24 @@ android {
         applicationId = "com.gimo.remotewebmanager"
         minSdk = 24
         targetSdk = 35
-        versionCode = 3
-        versionName = "0.2.1"
+        versionCode = 4
+        versionName = "0.2.2"
+    }
+
+    // 密钥随仓库提交（个人自用），CI 与本地统一用它签名，保证应用内自升级可覆盖安装
+    signingConfigs {
+        create("ci") {
+            storeFile = file("ci.keystore")
+            storePassword = "rwm-ci-2026"
+            keyAlias = "rwm"
+            keyPassword = "rwm-ci-2026"
+        }
     }
 
     buildTypes {
+        debug { signingConfig = signingConfigs.getByName("ci") }
         release {
+            signingConfig = signingConfigs.getByName("ci")
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }

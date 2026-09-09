@@ -1,13 +1,13 @@
 package com.gimo.remotewebmanager
 
+import android.content.Intent
 import android.os.Bundle
 import android.webkit.URLUtil
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.gimo.remotewebmanager.databinding.ActivityEditDeviceBinding
-import com.journeyapps.barcodescanner.ScanContract
-import com.journeyapps.barcodescanner.ScanOptions
 import kotlinx.coroutines.launch
 import java.net.URI
 
@@ -15,15 +15,15 @@ class EditDeviceActivity: AppCompatActivity() {
     private lateinit var b: ActivityEditDeviceBinding
     private val dao by lazy { AppDb.get(this).deviceDao() }
     private var editing: Device?=null
-    private val scanner=registerForActivityResult(ScanContract()){ result ->
-        result.contents?.let { b.urlInput.setText(it); if(b.nameInput.text.isBlank()) b.nameInput.setText(guessName(it)) }
+    private val scanner=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+        if(result.resultCode==RESULT_OK) result.data?.getStringExtra("scan_result")?.let { b.urlInput.setText(it); if(b.nameInput.text.isBlank()) b.nameInput.setText(guessName(it)) }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState); b=ActivityEditDeviceBinding.inflate(layoutInflater); setContentView(b.root)
         SystemBars.apply(b.root)
         val id=intent.getLongExtra("device_id",0)
         if(id>0) lifecycleScope.launch { editing=dao.get(id); editing?.let { b.nameInput.setText(it.name); b.urlInput.setText(it.url) } }
-        b.scanButton.setOnClickListener { scanner.launch(ScanOptions().setPrompt("扫描远程链接二维码").setBeepEnabled(false).setOrientationLocked(false)) }
+        b.scanButton.setOnClickListener { scanner.launch(Intent(this, ScanActivity::class.java)) }
         b.saveButton.setOnClickListener { save() }
     }
     private fun save(){
