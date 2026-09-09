@@ -16,7 +16,7 @@ class EditDeviceActivity: AppCompatActivity() {
     private val dao by lazy { AppDb.get(this).deviceDao() }
     private var editing: Device?=null
     private val scanner=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-        if(result.resultCode==RESULT_OK) result.data?.getStringExtra("scan_result")?.let { b.urlInput.setText(it); if(b.nameInput.text.isBlank()) b.nameInput.setText(guessName(it)) }
+        if(result.resultCode==RESULT_OK) result.data?.getStringExtra("scan_result")?.let { b.urlInput.setText(it); if(b.nameInput.text?.isBlank()==true) b.nameInput.setText(guessName(it)) }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState); b=ActivityEditDeviceBinding.inflate(layoutInflater); setContentView(b.root)
