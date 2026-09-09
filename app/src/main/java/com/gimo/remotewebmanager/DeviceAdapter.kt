@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gimo.remotewebmanager.databinding.ItemDeviceBinding
+import java.net.URI
 import java.text.DateFormat
 import java.util.Date
 
@@ -15,10 +16,12 @@ class DeviceAdapter(private val onClick:(Device)->Unit, private val onLong:(Devi
     override fun getItemCount()=items.size
     override fun onBindViewHolder(h: VH, p: Int) {
         val d=items[p]
+        h.b.avatar.text=d.name.trim().take(1).uppercase().ifBlank{ "远" }
         h.b.name.text=d.name
-        h.b.url.text=d.url
-        h.b.time.text=if(d.lastOpenedAt>0) "最近打开：${DateFormat.getDateTimeInstance().format(Date(d.lastOpenedAt))}" else "尚未打开"
+        h.b.host.text=hostOf(d.url)
+        h.b.time.text=if(d.lastOpenedAt>0) "最近打开：${DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Date(d.lastOpenedAt))}" else "尚未打开"
         h.b.root.setOnClickListener{ onClick(d) }
         h.b.root.setOnLongClickListener{ onLong(d); true }
     }
+    private fun hostOf(url: String): String = try { URI(url).host ?: url } catch (_: Exception) { url }
 }

@@ -37,6 +37,7 @@ class WebActivity: AppCompatActivity() {
         lifecycleScope.launch { AppDb.get(this@WebActivity).deviceDao().get(id)?.let { d -> b.title.text=d.name; if(savedInstanceState==null) w.loadUrl(d.url) } }
         if(savedInstanceState!=null) w.restoreState(savedInstanceState)
         b.reload.setOnClickListener{w.reload()}
+        b.backBtn.setOnClickListener{ onBackPressedDispatcher.onBackPressed() }
         onBackPressedDispatcher.addCallback(this, object:OnBackPressedCallback(true){ override fun handleOnBackPressed(){ if(w.canGoBack()) w.goBack() else finish() } })
     }
     override fun onSaveInstanceState(outState:Bundle){ b.webView.saveState(outState); super.onSaveInstanceState(outState) }

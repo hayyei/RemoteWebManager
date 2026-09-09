@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色：低饱和墨绿底，主色换成浅绿保证对比度 -->
+    <color name="md_primary">#8CD7B1</color>
+    <color name="md_onPrimary">#00391F</color>
+    <color name="md_primaryContainer">#005231</color>
+    <color name="md_onPrimaryContainer">#A9F0C9</color>
+    <color name="md_secondary">#B1CCBF</color>
+    <color name="md_onSecondary">#1D352B</color>
+    <color name="md_secondaryContainer">#344B41</color>
+    <color name="md_onSecondaryContainer">#CDE9DB</color>
+    <color name="md_tertiary">#A5CCDF</color>
+    <color name="md_onTertiary">#063343</color>
+    <color name="md_tertiaryContainer">#244B5A</color>
+    <color name="md_onTertiaryContainer">#C1E8FB</color>
+    <color name="md_error">#F2B8B5</color>
+    <color name="md_onError">#601410</color>
+    <color name="md_errorContainer">#8C1D18</color>
+    <color name="md_onErrorContainer">#F9DEDC</color>
+    <color name="md_background">#0E1311</color>
+    <color name="md_onBackground">#DFE4E0</color>
+    <color name="md_surface">#181D1A</color>
+    <color name="md_onSurface">#DFE4E0</color>
+    <color name="md_surfaceVariant">#404943</color>
+    <color name="md_onSurfaceVariant">#BEC9C2</color>
+    <color name="md_outline">#89968E</color>
+    <color name="md_outlineVariant">#404943</color>
+</resources>

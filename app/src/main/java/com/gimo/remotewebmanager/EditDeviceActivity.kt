@@ -21,7 +21,9 @@ class EditDeviceActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState); b=ActivityEditDeviceBinding.inflate(layoutInflater); setContentView(b.root)
         SystemBars.apply(b.root)
+        b.backBtn.setOnClickListener{ finish() }
         val id=intent.getLongExtra("device_id",0)
+        b.formTitle.text=if(id>0) "编辑设备" else "添加设备"
         if(id>0) lifecycleScope.launch { editing=dao.get(id); editing?.let { b.nameInput.setText(it.name); b.urlInput.setText(it.url) } }
         b.scanButton.setOnClickListener { scanner.launch(Intent(this, ScanActivity::class.java)) }
         b.saveButton.setOnClickListener { save() }
