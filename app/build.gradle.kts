@@ -13,8 +13,8 @@ android {
         applicationId = "com.gimo.remotewebmanager"
         minSdk = 24
         targetSdk = 35
-        versionCode = 5
-        versionName = "0.3.0"
+        versionCode = 6
+        versionName = "0.3.1"
     }
 
     // 密钥随仓库提交（个人自用），CI 与本地统一用它签名，保证应用内自升级可覆盖安装
